@@ -3,13 +3,6 @@ $services = Get-WmiObject win32_service | Where-Object { $_.PathName -like "*$sv
 
 foreach ($svc in $services) 
 {
-Write-Output "---------------------------------------"
-Write-Output "Name=$($svc.Name)"
-Write-Output "DisplayName=$($svc.DisplayName)"
-Write-Output "State=$($svc.State)"
-Write-Output "PathName=$($svc.PathName)"
-Write-Output "StartName=$($svc.StartName)"
-
 Stop-Service -Name $svc.Name
 $tempSvc = Get-Service -Name $svc.Name
 if ($tempSvc.Status -ne "Stopped") 
